@@ -15,15 +15,17 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 const datos = async ()=>{
-    var arreglo1
-    try{
-        arreglo1 = await axios.get(`https://api.rawg.io/api/games?key=${KEY}`)
-    }
-    catch(e){
-        console.log(e)
-    }
-
-    const infoSimpleApi = arreglo1.map(function(datos) {const info={
+    const arreglo1 = await axios.get(`https://api.rawg.io/api/games?key=${KEY}`)
+    const arreglo2 = await axios.get(arreglo1.data.next)
+    const arreglo3 = await axios.get(arreglo2.data.next)
+    const arreglo4 = await axios.get(arreglo3.data.next)
+    const arreglo5 = await axios.get(arreglo4.data.next)
+    
+    const arr1= arreglo1.data.results.concat(arreglo2.data.results)
+    const arr2= arr1.concat(arreglo3.data.results)
+    const arr3= arr2.concat(arreglo4.data.results)
+    const arr4= arr3.concat(arreglo5.data.results)
+    const infoSimpleApi = arr4.map(function(datos) {const info={
         id: datos.id,
         name: datos.name,
         genres: datos.genres.map(genero=> genero.name),
