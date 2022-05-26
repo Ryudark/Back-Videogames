@@ -15,40 +15,14 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 const datos = async ()=>{
-    // const arreglo=[]
-    // const url= `https://api.rawg.io/api/games?key=${KEY}`
-    // const arreglo=[]
-    // const url= `https://api.rawg.io/api/games?key=${KEY}`
-    // try{
-        
-    //     for(let i=0; i<5; i++){
-    //         let infoSimpleApi= await axios.get(url)
-    //         infoSimpleApi.data.results?.map(datos=>{
-    //             arreglo.push({
-    //                 id: datos.id,
-    //                 name: datos.name,
-    //                 genres: datos.genres.map(genero=> genero.name),
-    //                 image: datos.background_image,
-    //                 rating: datos.rating
-    //             })
-    //         })
-    //         url=infoSimpleApi.data.next
-    //         console.log(url)
-    //     }
-    // }
-    // catch(e){
-    //     console.log(e)
-    // }
-    const arreglo1 = await axios.get(`https://api.rawg.io/api/games?key=${KEY}`)
-    // const arreglo2 = await axios.get(arreglo1.data.next)
-    // const arreglo3 = await axios.get(arreglo2.data.next)
-    // const arreglo4 = await axios.get(arreglo3.data.next)
-    // const arreglo5 = await axios.get(arreglo4.data.next)
-    
-    // const arr1= arreglo1.data.results.concat(arreglo2.data.results)
-    // const arr2= arr1.concat(arreglo3.data.results)
-    // const arr3= arr2.concat(arreglo4.data.results)
-    // const arr4= arr3.concat(arreglo5.data.results)
+    var arreglo1
+    try{
+        arreglo1 = await axios.get(`https://api.rawg.io/api/games?key=${KEY}`)
+    }
+    catch(e){
+        console.log(e)
+    }
+
     const infoSimpleApi = arreglo1.map(function(datos) {const info={
         id: datos.id,
         name: datos.name,
